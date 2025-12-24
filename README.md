@@ -1,219 +1,120 @@
-# 🧠 GitHub Profile Auditor (AI-Assisted)
+# 🕵️‍♂️ AI GitHub Auditor (Forensic Edition)
 
-> **An opinionated, career-aware GitHub audit tool that separates signal from noise — using deterministic scoring with AI-backed explanations.**
+> **"Code that isn't documented doesn't exist."**
 
----
+An opinionated, forensic audit tool that grades GitHub profiles and repositories for job-readiness. It separates **Signal from Noise** using strict engineering standards, detecting tutorial clones, low-effort forks, and "marketing fluff" that lacks code evidence.
 
-## 🚨 Problem
-
-Most GitHub profiles don’t fail because developers lack skill — they fail because their **signal is buried**.
-
-Common issues:
-- Beginner or tutorial repos mixed with serious projects  
-- Hackathon demos presented as production work  
-- Forks and course repos cluttering the profile  
-- No clarity on what should be kept, archived, or hidden  
-
-Recruiters don’t investigate deeply.  
-They skim, judge, and move on.
-
-**This tool helps you curate your GitHub profile deliberately, not guess blindly.**
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Status](https://img.shields.io/badge/status-Lethal%20Mode-red)
+![Stack](https://img.shields.io/badge/stack-React%20%7C%20Node.js%20%7C%20Llama%203.3-orange)
 
 ---
 
-## 🎯 What this tool does
+## 🚨 The Problem
 
-Given a **GitHub username**, the application:
+Most GitHub profiles fail not because developers lack skill, but because **their best work is buried**.
+Recruiters spend **<10 seconds** on a profile. If they see:
+* ❌ 30+ "Tutorial" repos (e.g., `react-course-chapter-1`)
+* ❌ Forks with zero commits
+* ❌ "Full-Stack" apps with empty READMEs
+* ❌ "AI Projects" that are just API wrappers
 
-1. Fetches all public repositories using the GitHub API  
-2. Evaluates each repository using **rule-based scoring**
-3. Uses **Gemini AI** to explain *why* a repository helps or hurts
-4. Assigns clear verdicts:
-   - ✅ **KEEP PUBLIC**
-   - 🗃️ **ARCHIVE**
-   - 🔒 **MAKE PRIVATE** (recommendation only)
-5. Computes an overall **GitHub Profile Score**
-6. Generates a **profile-level audit** with actionable recommendations
-
-⚠️ The tool **never modifies GitHub**.  
-It only analyzes, scores, and recommends.  
-The user remains fully in control.
+...they close the tab. **You lose the interview.**
 
 ---
 
-## 📊 GitHub Profile Score
+## 🎯 What This Tool Does
 
-After evaluating all repositories, the tool assigns a **profile score (0–100)**.
+This is not a "nice" AI. It acts as a **Cynical Senior Hiring Manager**.
+It audits your profile in two stages:
 
-### Repo-level factors
-- Technical depth  
-- Recency & maintenance  
-- README quality  
-- Deployment presence  
-- Real-world usefulness  
-- Collaboration signals  
-- Noise (tutorials, forks, abandoned demos)
+### 1. The "First Impression" (Profile Audit)
+Before looking at code, it judges your **Presentation**:
+* Does your Bio & README clearly state your value?
+* Do you have a professional avatar and links?
+* **Verdict:** Assigns a `Profile Score` (0-100) and an RPG-style Class (e.g., *"The Full-Stack Catalyst"* or *"The Ghost Developer"*).
 
-### Profile-level factors
-- Signal-to-noise ratio  
-- Consistency of tech stack  
-- Presence of flagship projects  
-- Relevance to target role  
-
-> **Important:**  
-> The score is **deterministic and rule-based**.  
-> Gemini AI is used only to **explain and contextualize** the score — not generate it arbitrarily.
-
-This keeps the score:
-- consistent  
-- comparable  
-- trustworthy  
+### 2. The "Forensic Deep Dive" (Repo Audit)
+When you ask it to verify a specific repository, it performs a **Lethal Audit**:
+* **Boilerplate Detection:** If >50% of your code is config/JSON, you get a penalty.
+* **The "Ghost" Rule:** Great code with no README = **Max Score 75**.
+* **One-Day Wonders:** If you built a "complex app" in <24 hours, it flags it as a "Rush Job" (Max Score 60).
+* **Claim Verification:** If you claim "AI-Powered" but have no ML libraries, it flags a "Marketing Mismatch".
 
 ---
 
-## 🧠 Core Design Philosophy
+## 📊 The Scoring System (Strict Mode)
 
-This is **not** “let AI judge my GitHub”.
+We use **Llama 3.3 (via Groq)** with a low temperature to ensure objective grading.
 
-It is a **hybrid audit system**:
-
-GitHub Data
-↓
-Rule-Based Repo Scoring
-↓
-Profile Aggregation
-↓
-Gemini AI (explanations & critique)
-↓
-Human Decision
-
-yaml
-Copy code
-
-Rules decide.  
-AI explains.  
-User controls.
-
----
-
-## 👤 User Inputs
-
-### Required
-- **GitHub username**
-
-### Optional (Career-Aware Mode)
-These inputs adjust expectations, not outcomes:
-- Target role (Frontend / Backend / Full-Stack)
-- Experience level (Student / Fresher / Professional)
-- Career goal (Internship / Job / OSS)
-- Primary tech stack
-- Time horizon (e.g. “applying in 3 months”)
-
-No essays.  
-No personality fields.  
-No unnecessary friction.
-
----
-
-## 🧠 What Gemini AI does (and does NOT)
-
-### Gemini DOES
-- Explain repository strengths & weaknesses  
-- Identify recruiter red flags  
-- Suggest concrete improvements  
-- Justify verdicts clearly  
-- Summarize overall profile readiness  
-
-### Gemini DOES NOT
-- Decide scores  
-- Change repository visibility  
-- Archive or delete repositories  
-- Act without rule-based grounding  
-
----
-
-## 🧪 Repo-Level Audit Output
-
-For each repository:
-- Purpose & tech stack  
-- Activity & maintenance status  
-- README quality  
-- Deployment status  
-- Rule-based score  
-- Final verdict  
-- Gemini explanation  
-- “Recruiter one-liner”  
-
----
-
-## 📈 Profile-Level Audit Output
-
-- GitHub Profile Score (0–100)  
-- Signal vs noise breakdown  
-- Recommended pinned repositories  
-- What to archive or hide next  
-- Internship / entry-level readiness summary  
+| Tier | Score | Definition |
+| :--- | :--- | :--- |
+| **🏆 FLAGSHIP** | **90-100** | Real-world app. Complex logic (Auth, State, CI/CD). **MUST have extensive documentation.** |
+| **🛠️ SOLID** | **70-89** | Clean code that works. Caps at 80 if it's a generic "Buzzword Stack" (MERN CRUD) or lacks a README. |
+| **😐 NEUTRAL** | **40-69** | Config files, simple scripts, "Profile READMEs", or repos with >50% boilerplate. |
+| **🗑️ NOISE** | **0-39** | Forks, "Hello World" tests, empty folders, or obvious tutorial clones (`scrimba`, `bootcamp`). |
 
 ---
 
 ## 🧱 Tech Stack
 
-### Frontend
-- React  
-- Tailwind CSS  
-
-### Backend
-- Node.js  
-- GitHub REST API  
-- Gemini API (server-side only)  
+* **Frontend:** React, Tailwind CSS (Dark Mode UI)
+* **Backend:** Node.js, Express, TypeScript
+* **AI Engine:** Groq SDK (Llama-3.3-70b-Versatile)
+* **Data Source:** GitHub REST API
 
 ---
 
-## 🗺️ Development Phases
+## 🚀 Getting Started
 
-### Phase 1 — MVP
-- GitHub username input  
-- Repository fetching  
-- Rule-based repository scoring  
-- Verdicts + profile score  
+### Prerequisites
+* Node.js (v18+)
+* A free [Groq API Key](https://console.groq.com)
+* (Optional) GitHub Personal Access Token (for higher rate limits)
 
-### Phase 2 — AI Layer
-- Gemini explanations  
-- Repository & profile summaries  
+### Installation
 
-### Phase 3 — Career Context
-- Optional inputs  
-- Context-aware analysis  
+1.  **Clone the repo**
+    ```bash
+    git clone [https://github.com/prem22k/ai-github-auditor.git](https://github.com/prem22k/ai-github-auditor.git)
+    cd ai-github-auditor
+    ```
 
-No feature creep before Phase 1 is complete.
+2.  **Setup Backend**
+    ```bash
+    cd backend
+    npm install
+    # Create .env file
+    echo "GROQ_API_KEY=your_key_here" > .env
+    npm run dev
+    ```
 
----
+3.  **Setup Frontend**
+    ```bash
+    cd frontend
+    npm install
+    npm run dev
+    ```
 
-## 🎯 Target Users
-
-- College students  
-- Internship seekers  
-- Early-career developers  
-- Anyone cleaning their GitHub profile before applications  
-
----
-
-## 🏁 Why this project matters
-
-This project demonstrates:
-- API integration  
-- System design  
-- Responsible AI usage  
-- Product thinking  
-- Career-focused engineering decisions  
-
-This is **resume-worthy**, not a toy project.
+4.  **Audit Yourself**
+    Open `http://localhost:5173` and enter your GitHub username.
 
 ---
 
-## ⚠️ Final Note
+## ⚠️ Disclaimer
 
-The score is a **guidance metric**, not an absolute judgment.  
-The goal is clarity, not validation.
+This tool is **opinionated**. It mimics the harsh reality of tech hiring.
+* It **will** hurt your feelings if your repos are empty.
+* It **will** give you a low score if you pushed a repo 5 minutes ago (The "One-Day Build" penalty).
 
-Clean signal wins interviews.
+**The goal is not to validate you. The goal is to get you hired.**
+
+---
+
+### 👤 Author
+
+**Prem Sai Kota**
+* GitHub: [@prem22k](https://github.com/prem22k)
+* LinkedIn: [Prem Sai Kota](https://linkedin.com/in/premsai22k)
+
+_"Building tools that tell the truth."_
