@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 interface RepoTableProps {
   repos: any[];
@@ -14,7 +15,7 @@ const RepoTable: React.FC<RepoTableProps> = ({ repos, username }) => {
     setLoadingRepos(prev => new Set(prev).add(repoName));
     
     try {
-      const res = await axios.post('http://localhost:3000/api/repo/analyze', {
+      const res = await axios.post(`${API_BASE_URL}/api/repo/analyze`, {
         username,
         repoName
       });
