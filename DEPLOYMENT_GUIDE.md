@@ -13,7 +13,7 @@ Render is a great choice for deploying Node.js applications.
     *   **Environment Variables:**
         *   `GROQ_API_KEY`: Your Groq API Key.
         *   `GITHUB_TOKEN`: Your GitHub Personal Access Token.
-        *   `NODE_VERSION`: `18` (or your local version).
+        *   `NODE_VERSION`: `20` (Recommended).
 3.  **Deploy.**
 4.  **Copy the URL** (e.g., `https://github-profile-audit-backend.onrender.com`).
 
@@ -25,10 +25,13 @@ Vercel is optimized for Vite/React apps.
     *   Connect your GitHub repository.
     *   **Root Directory:** `frontend`
     *   **Framework Preset:** Vite
+    *   **Build Command:** `npm run build` (Default)
+    *   **Output Directory:** `dist` (Default)
     *   **Environment Variables:**
         *   `VITE_API_URL`: The URL of your deployed backend (e.g., `https://github-profile-audit-backend.onrender.com`).
             *   *Note: Do NOT include a trailing slash.*
 2.  **Deploy.**
+    *   *Note: A `vercel.json` file has been added to handle client-side routing (preventing 404s on refresh).*
 
 ## 3. Final Configuration
 
