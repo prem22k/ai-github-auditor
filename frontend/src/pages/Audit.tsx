@@ -4,6 +4,7 @@ import axios from 'axios';
 import RepoTable from '../components/RepoTable';
 import ProfileHero from '../components/ProfileHero';
 import ProfileAnalysis from '../components/ProfileAnalysis';
+import { API_BASE_URL } from '../config';
 
 const Audit = () => {
   const { username } = useParams();
@@ -16,7 +17,7 @@ const Audit = () => {
     if (!username) return;
     
     // 1. Fetch Profile Data (Score, Nickname, Analysis)
-    axios.get(`http://localhost:3000/api/profile/${username}`)
+    axios.get(`${API_BASE_URL}/api/profile/${username}`)
       .then(res => {
         setProfileData(res.data);
         setLoadingProfile(false);
@@ -27,7 +28,7 @@ const Audit = () => {
       });
 
     // 2. Fetch Repo List (Raw list for evidence)
-    axios.get(`http://localhost:3000/api/audit/${username}`)
+    axios.get(`${API_BASE_URL}/api/audit/${username}`)
       .then(res => {
         setRepos(res.data.repos);
         setLoadingRepos(false);

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { API_BASE_URL } from '../config';
 
 // Define the shape of the AI result
 export interface AiAuditResult {
@@ -38,7 +39,7 @@ export const useAiAuditQueue = (repos: any[], username: string) => {
           console.log(`Analyzing ${repo.name}...`);
           
           // Using fetch instead of axios to avoid dependency issues
-          const response = await fetch('http://localhost:3000/api/audit/analyze-repo', {
+          const response = await fetch(`${API_BASE_URL}/api/audit/analyze-repo`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, repoName: repo.name }),
