@@ -8,6 +8,8 @@ An opinionated, forensic audit tool that grades GitHub profiles and repositories
 ![Status](https://img.shields.io/badge/status-Lethal%20Mode-red)
 ![Stack](https://img.shields.io/badge/stack-React%20%7C%20Node.js%20%7C%20Llama%203.3-orange)
 
+**[🔴 Live Demo](https://ai-github-auditor.vercel.app/)** | **[⚙️ API](https://ai-github-auditor-api.onrender.com/health)**
+
 ---
 
 ## 🚨 The Problem
