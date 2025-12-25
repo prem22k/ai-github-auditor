@@ -12,19 +12,29 @@ const Audit = () => {
   const [repos, setRepos] = useState<any[]>([]);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [loadingRepos, setLoadingRepos] = useState(true);
+  const [showColdStart, setShowColdStart] = useState(false);
 
   useEffect(() => {
     if (!username) return;
+    
+    // 🕒 Timer: If loading takes > 3 seconds, show the "Waking Up" message
+    const coldStartTimer = setTimeout(() => {
+      setShowColdStart(true);
+    }, 3000);
     
     // 1. Fetch Profile Data (Score, Nickname, Analysis)
     axios.get(`${API_BASE_URL}/api/profile/${username}`)
       .then(res => {
         setProfileData(res.data);
         setLoadingProfile(false);
+        clearTimeout(coldStartTimer);
+        setShowColdStart(false);
       })
       .catch(err => {
         console.error("Profile fetch error:", err);
         setLoadingProfile(false);
+        clearTimeout(coldStartTimer);
+        setShowColdStart(false);
       });
 
     // 2. Fetch Repo List (Raw list for evidence)
@@ -37,6 +47,8 @@ const Audit = () => {
         console.error("Repo fetch error:", err);
         setLoadingRepos(false);
       });
+
+    return () => clearTimeout(coldStartTimer);
   }, [username]);
 
   return (
@@ -49,6 +61,17 @@ const Audit = () => {
              <div className="text-center">
                 <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                 <div className="text-gray-500 font-mono text-sm">Analyzing Profile Brand...</div>
+                
+                {/* ❄️ THE COLD START MESSAGE */}
+                {showColdStart && (
+                  <div className="bg-yellow-900/30 border border-yellow-600/50 p-4 rounded-lg max-w-md mx-auto mt-4 animate-fade-in">
+                    <p className="text-yellow-400 font-bold text-sm">⚠️ Server Waking Up</p>
+                    <p className="text-gray-300 text-xs mt-1">
+                      Since we are on the free tier, the forensic engine is spinning up. 
+                      This may take up to 60 seconds. Please hold on!
+                    </p>
+                  </div>
+                )}
              </div>
           </div>
         ) : profileData ? (
