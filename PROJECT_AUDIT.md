@@ -1,7 +1,7 @@
 # PROJECT_AUDIT.md
 
 ## The One-Liner
-A high-performance, opinionated GitHub auditing tool that combines deterministic forensic heuristics with Llama 3.3 (via Groq) to simulate a cynical engineering manager's deep-dive review.
+A high-performance, opinionated GitHub auditing tool that combines deterministic forensic heuristics with GPT-OSS 120B (via Groq) to simulate a cynical engineering manager's deep-dive review.
 
 ## The 'Technical Hook' (Crucial)
 **The 'Cynical Manager' Hybrid Audit Logic** (`backend/src/ai/repoAuditor.ts`)
