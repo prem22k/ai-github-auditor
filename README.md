@@ -6,7 +6,7 @@ An opinionated, forensic audit tool that grades GitHub profiles and repositories
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Status](https://img.shields.io/badge/status-Lethal%20Mode-red)
-![Stack](https://img.shields.io/badge/stack-React%20%7C%20Node.js%20%7C%20Llama%203.3-orange)
+![Stack](https://img.shields.io/badge/stack-React%20%7C%20Node.js%20%7C%20GPT--OSS%20120B-orange)
 
 **[🔴 Live Demo](https://ai-github-auditor.vercel.app/)** | **[⚙️ API](https://ai-github-auditor-api.onrender.com/health)**
 
@@ -47,7 +47,7 @@ When you ask it to verify a specific repository, it performs a **Lethal Audit**:
 
 ## 📊 The Scoring System (Strict Mode)
 
-We use **Llama 3.3 (via Groq)** with a low temperature to ensure objective grading.
+We use **GPT-OSS 120B (via Groq)** with a low temperature to ensure objective grading.
 
 | Tier | Score | Definition |
 | :--- | :--- | :--- |
@@ -62,7 +62,7 @@ We use **Llama 3.3 (via Groq)** with a low temperature to ensure objective gradi
 
 * **Frontend:** React, Tailwind CSS (Dark Mode UI)
 * **Backend:** Node.js, Express, TypeScript
-* **AI Engine:** Groq SDK (Llama-3.3-70b-Versatile)
+* **AI Engine:** Groq SDK (GPT-OSS 120B, configurable via `GROQ_MODEL`)
 * **Data Source:** GitHub REST API
 
 ---
@@ -86,10 +86,18 @@ We use **Llama 3.3 (via Groq)** with a low temperature to ensure objective gradi
     ```bash
     cd backend
     npm install
-    # Create .env file
-    echo "GROQ_API_KEY=your_key_here" > .env
+    cp .env.example .env
+    # Add your GROQ_API_KEY to .env, then start the server
     npm run dev
     ```
+
+    **Backend environment variables** (`backend/.env`):
+
+    | Variable | Required | Description |
+    | :--- | :--- | :--- |
+    | `GROQ_API_KEY` | Yes | Your Groq API key. |
+    | `GITHUB_TOKEN` | No | GitHub personal access token (raises API rate limits). |
+    | `GROQ_MODEL` | No | Groq model for AI audits. Defaults to `openai/gpt-oss-120b`. |
 
 3.  **Setup Frontend**
     ```bash

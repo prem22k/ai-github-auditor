@@ -17,7 +17,7 @@ Instead, please send an email to **premsai224k@gmail.com**. All security vulnera
 
 ## AI & LLM Security
 
-This tool uses Large Language Models (LLMs) like Llama 3.3 (via Groq) to analyze code.
+This tool uses Large Language Models (LLMs) like GPT-OSS 120B (via Groq) to analyze code.
 
 ### Prompt Injection
 While we attempt to sanitize inputs (repository names, file contents, etc.) before sending them to the AI provider, users should be aware that:
