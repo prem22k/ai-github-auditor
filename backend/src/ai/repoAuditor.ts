@@ -1,5 +1,6 @@
 import Groq from "groq-sdk";
 import dotenv from 'dotenv';
+import { GROQ_MODEL } from "./model";
 
 dotenv.config();
 
@@ -79,8 +80,9 @@ export async function auditRepoWithGroq(username: string, repoMetadata: any, rea
         { role: "system", content: REPO_SYSTEM_PROMPT },
         { role: "user", content: userMessage },
       ],
-      model: "llama-3.3-70b-versatile",
+      model: GROQ_MODEL,
       temperature: 0.2, // Low temp for strict grading
+      max_tokens: 8192,
       response_format: { type: "json_object" },
     });
 

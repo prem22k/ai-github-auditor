@@ -1,5 +1,6 @@
 import Groq from "groq-sdk";
 import dotenv from 'dotenv';
+import { GROQ_MODEL } from "./model";
 
 dotenv.config();
 
@@ -53,8 +54,9 @@ export async function auditProfileWithGroq(userMetadata: any, profileReadme: str
         { role: "system", content: PROFILE_SYSTEM_PROMPT },
         { role: "user", content: userMessage },
       ],
-      model: "llama-3.3-70b-versatile",
+      model: GROQ_MODEL,
       temperature: 0.5,
+      max_tokens: 8192,
       response_format: { type: "json_object" },
     });
 
@@ -66,8 +68,8 @@ export async function auditProfileWithGroq(userMetadata: any, profileReadme: str
     return {
       score: 50,
       nickname: "The Unranked",
-      headline: "Profile Analysis Unavailable",
-      summary: "AI Service is currently overloaded. Please try again later.",
+      headline: "Scores computed from your GitHub data",
+      summary: "AI analysis is unavailable right now — the scores below are computed from your GitHub data.",
       strengths: [],
       missing_elements: []
     };

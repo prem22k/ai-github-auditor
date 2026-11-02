@@ -13,6 +13,7 @@ Render is a great choice for deploying Node.js applications.
     *   **Environment Variables:**
         *   `GROQ_API_KEY`: Your Groq API Key.
         *   `GITHUB_TOKEN`: Your GitHub Personal Access Token.
+        *   `GROQ_MODEL` (optional): The Groq model used for AI audits. Defaults to `openai/gpt-oss-120b`.
         *   `NODE_VERSION`: `20` (Recommended).
 3.  **Deploy.**
 4.  **Copy the URL** (e.g., `https://github-profile-audit-backend.onrender.com`).

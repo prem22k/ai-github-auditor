@@ -7,7 +7,7 @@ This document outlines the internal architecture of the **AI GitHub Auditor**. T
 The application follows a standard Client-Server architecture:
 *   **Frontend:** React + Vite + Tailwind CSS (Single Page Application).
 *   **Backend:** Node.js + Express (REST API).
-*   **AI Provider:** Groq (running Llama 3.3 70B).
+*   **AI Provider:** Groq (running GPT-OSS 120B).
 *   **Data Source:** GitHub REST API.
 
 ## Data Flow Diagram
@@ -18,7 +18,7 @@ sequenceDiagram
     participant FE as React Frontend
     participant BE as Node.js Backend
     participant GH as GitHub API
-    participant AI as Groq (Llama 3.3)
+    participant AI as Groq (GPT-OSS 120B)
 
     User->>FE: Enters Username
     FE->>BE: GET /api/profile/:username
@@ -63,14 +63,14 @@ sequenceDiagram
 *   **Logic:**
     1.  **Heuristics:** Calculates "Dev Duration" (Last Push - Created At). If < 24 hours, it flags a "One-Day Build".
     2.  **Context Assembly:** Combines the file tree structure, README content, and heuristic flags into a strict prompt.
-    3.  **AI Analysis:** Sends this context to Llama 3.3 via Groq to classify the repo into strict tiers (FLAGSHIP, SOLID, NEUTRAL, NOISE).
+    3.  **AI Analysis:** Sends this context to GPT-OSS 120B via Groq to classify the repo into strict tiers (FLAGSHIP, SOLID, NEUTRAL, NOISE).
 
 ## Design Decisions
 
 ### Why Groq?
-We chose **Groq** running **Llama 3.3 70B** for two reasons:
+We chose **Groq** running **GPT-OSS 120B** for two reasons:
 1.  **Speed:** Groq's LPU (Language Processing Unit) architecture delivers tokens at near-instant speeds, essential for a real-time auditing tool.
-2.  **Reasoning Capability:** Llama 3.3 70B offers "GPT-4 class" reasoning, which is required to follow our complex, multi-step "Cynical Manager" instructions without hallucinating high scores.
+2.  **Reasoning Capability:** GPT-OSS 120B offers strong multi-step reasoning, which is required to follow our complex, multi-step "Cynical Manager" instructions without hallucinating high scores.
 
 ### Why Separate Profile vs. Repo Audits?
 *   **Rate Limits:** Auditing every repository immediately would hit GitHub API rate limits and AI token limits instantly.
